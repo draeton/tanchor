@@ -15,6 +15,7 @@
     // ## String prototype helper methods
 
     // Trim whitespace from the end of the string
+    // 
     //     @param {String} c An optional additional character to remove
     //     @return {String}
     if (!String.prototype.trimEnd) {
@@ -27,6 +28,7 @@
     }
     
     // Trim whitespace from the start of the string
+    // 
     //     @param {String} c An optional additional character to remove
     //     @return {String}
     if (!String.prototype.trimStart) {
@@ -39,6 +41,7 @@
     }
     
     // Escape special characters in a string
+    // 
     //     @return {String}
     if (!String.prototype.escapeRegExp) {
         String.prototype.escapeRegExp = function () {
@@ -49,6 +52,7 @@
     // ## Tanchor constructor
     // 
     // Use an anchor to parse a url
+    // 
     //     @param {String} url The url to parse
     //     @return {Tanchor} An object with url components
     function Tanchor (url) {
@@ -79,6 +83,7 @@
     // ## Tanchor prototype
     //
     // *Methods:*
+    // 
     //     {String} toString,
     //     {String|Null} getSearchVal,
     //     {String|Null} getHashVal,
@@ -89,6 +94,7 @@
         // ### toString
         // 
         // Make a url from a Tanchor object
+        // 
         //     @return {String} the url
         function toString () {
             var search, hash, str;
@@ -112,6 +118,7 @@
         // ### *getUrlValueGetter*
         // 
         // Used as curry function for search or hash value getter
+        // 
         //     @param {String} type Either "search" or "hash"
         function getUrlValueGetter (type) {
 
@@ -119,6 +126,7 @@
             var char0 = (type === "search") ? "?" : "#";
 
             // Get the key value of a url search or hash
+            // 
             //     @param {String} key
             //     @return {String} The value
             return function (key) {
@@ -153,6 +161,7 @@
         // ### *getUrlValueSetter*
         // 
         // Used as curry function for search or hash value setter
+        // 
         //     @param {String} type Either "search" or "hash"
         function getUrlValueSetter (type) {
 
@@ -160,6 +169,7 @@
             var char0 = (type === "search") ? "?" : "#";
 
             // Set the key value of a url search or hash
+            // 
             //     @param {String} key
             //     @param {String} value The new value
             //     @praam {Boolean} doRemoveBlank If true, remove the key on value === ""
@@ -192,7 +202,7 @@
             };
         }
         
-        // **Tanchor.prototype public interface
+        // **Tanchor.prototype public interface**
         return {            
             toString     : toString,
             getSearchVal : getUrlValueGetter("search"),
