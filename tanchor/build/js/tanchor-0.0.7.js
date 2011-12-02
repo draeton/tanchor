@@ -120,6 +120,7 @@
         // Used as curry function for search or hash value getter
         // 
         //     @param {String} type Either "search" or "hash"
+        //     @return {Function}
         function getUrlValueGetter (type) {
 
             /* start character for regexp */
@@ -163,6 +164,7 @@
         // Used as curry function for search or hash value setter
         // 
         //     @param {String} type Either "search" or "hash"
+        //     @return {Function}
         function getUrlValueSetter (type) {
 
             /* start character for regexp */
