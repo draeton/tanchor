@@ -30,7 +30,7 @@ Matthew Cobbs (matthew.cobbs@gmail.com)
 
 ## Download
 
-The latest release, **0.0.5 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.0.5.zip).**
+The latest release, **0.0.6 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.0.6.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/tanchor/zipball/master) 
 or [tar](https://github.com/draeton/tanchor/tarball/master) formats.
@@ -41,7 +41,7 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 </section>
 
-<script src="(http://draeton.github.com/tanchor/tanchor/build/js/tanchor-0.0.5-min.js"></script>
+<script src="(http://draeton.github.com/tanchor/tanchor/build/js/tanchor-0.0.6-min.js"></script>
 <script>
 $(document).ready(function () {
 });
