@@ -34,7 +34,7 @@ Documentation is available [here.](http://draeton.github.com/tanchor/tanchor/doc
 
 ## Download
 
-The latest release, **0.7.13 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.7.13.zip).**
+The latest release, **0.7.14 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.7.14.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/tanchor/zipball/master) 
 or [tar](https://github.com/draeton/tanchor/tarball/master) formats.
@@ -47,7 +47,7 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 <script>
 Modernizr.load({
-    load: "/tanchor/tanchor/build/js/tanchor-0.7.13-min.js",
+    load: "/tanchor/tanchor/build/js/tanchor-0.7.14-min.js",
     complete: function () {
     }
 });
