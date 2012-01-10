@@ -1,23 +1,51 @@
 ## Tanchor
 
 [Tanchor](http://draeton.github.com/tanchor/).
-The current version is `0.7.22`. Documentation is available
+The current version is `0.7.23`. Documentation is available
 [here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html).
 
 
 ## Implementation
 
+Tanchor is a single-script utility.
 
-## Dependencies
+    <script src="js/tanchor-0.7.23-min.js"></script>
 
-jQuery 1.7+
+
+## Usage
+
+    var a = new Tanchor("http://www.example.com?fruit=banana&pie=apple#page=1");
+    a.href;   // "http://www.example.com?fruit=banana&pie=apple#page=1";
+    a.search; // "?fruit=banana&pie=apple"
+    a.hash;   // "#page=1"
+
+    a.getSearchVars(); // {"fruit": "banana", "pie": "apple"}
+    a.getHashVars();   // {"page": "1"}
+
+    a.setSearchVars({fruit: "pear", type: "test"});
+    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=1"
+
+    a.setHashVars({page: 2});
+    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=2"
+
+    a.setSearchVar("type", "live");
+    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=2"
+
+    a.setHashVar("page", 3);
+    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=3"
+
+    a.delSearchVar("type");
+    a.href; // "http://www.example.com/?fruit=pear&pie=apple#page=3"
+
+    a.delHashVar("page");
+    a.href; // "http://www.example.com/?fruit=pear&pie=apple#"
 
 
 ## License
 
 (The MIT License)
 
-Copyright (c) 2011, <[Matthew Cobbs](mailto:draeton@gmail.com)>
+Copyright (c) 2012, <[Matthew Cobbs](mailto:draeton@gmail.com)>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
