@@ -5,24 +5,6 @@
 // Copyright 2012, Matthew Cobbs
 // MIT licensed
 //
-// ### Methods:
-//
-// `getSearchVars` - returns a key-value object with the parameters in the URL search
-//
-// `setSearchVars(map)` - sets parameters using a key-value object in the URL search
-//
-// `setSearchVar(key, val)` - sets the key parameter to val in the URL search
-//
-// `delSearchVar(key)` - deletes the key parameter from the URL search
-//
-// `getHashVars` - returns a key-value object with the parameters in the URL hash
-//
-// `setHashVars(map)` - sets parameters using a key-value object in the URL hash
-//
-// `setHashVar(key, val)` - sets the key parameter to val in the URL hash
-//
-// `delHashVar(key)` - deletes the key parameter from the URL hash
-//
 // ### Usage:
 //
 //     var a = new Anchor("http://www.example.com?fruit=banana&pie=apple#page=1");
