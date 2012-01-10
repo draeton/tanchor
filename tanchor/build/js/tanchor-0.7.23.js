@@ -7,7 +7,7 @@
 //
 // ### Usage:
 //
-//     var a = new Anchor("http://www.example.com?fruit=banana&pie=apple#page=1");
+//     var a = new Tanchor("http://www.example.com?fruit=banana&pie=apple#page=1");
 //     a.href;   // "http://www.example.com?fruit=banana&pie=apple#page=1";
 //     a.search; // "?fruit=banana&pie=apple"
 //     a.hash;   // "#page=1"
