@@ -22,21 +22,6 @@
         </filelist>
     </target>
 
-    <target name="-lib-exists" description="Check if lib exists">
-        <condition property="lib.exists">
-            <available file="${src.dir}/lib" type="dir"/>
-        </condition>
-    </target>
-
-
-    <target name="-copy-depends" depends="-init" if="lib.exists" description="Copying dependencies">
-        <echo>Copying dependencies</echo>
-
-        <copy todir="${build.dir}/js">
-            <fileset dir="${src.dir}/lib"/>
-        </copy>
-    </target>
-
 
     <!-- * build * -->
     <target name="prod"
