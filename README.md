@@ -1,7 +1,7 @@
 ## Tanchor
 
 [Tanchor](http://draeton.github.com/tanchor/).
-The current version is `0.0.11`. Documentation is available
+The current version is `0.0.12`. Documentation is available
 [here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html).
 
 
