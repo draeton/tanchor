@@ -14,7 +14,7 @@ using the DOM's anchor element.
 Tanchor is a single-script utility.
 
 {% highlight html %}
-<script src="js/tanchor-0.7.23-min.js"></script>
+<script src="js/tanchor-0.7.24-min.js"></script>
 {% endhighlight %}
 
 Documentation is available [here.](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html)
@@ -66,7 +66,7 @@ a.href; // "http://www.example.com/?fruit=pear&pie=apple#"
 
 ## Download
 
-The latest release, **0.7.23 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.7.23.zip).**
+The latest release, **0.7.24 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.7.24.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/tanchor/zipball/master)
 or [tar](https://github.com/draeton/tanchor/tarball/master) formats.
@@ -79,7 +79,7 @@ You can also clone the project with [Git](http://git-scm.com) by running:
 
 <script>
 Modernizr.load({
-    load: "/tanchor/tanchor/build/js/tanchor-0.7.23-min.js",
+    load: "/tanchor/tanchor/build/js/tanchor-0.7.24-min.js",
     complete: function () {
     }
 });

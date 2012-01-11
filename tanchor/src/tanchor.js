@@ -50,12 +50,17 @@ var Tanchor = (function (window, document, undefined) {
 
   // **object extend**
   var extend = function (o, o2) {
-    var i;
+    var args = Array.prototype.slice.call(arguments, 2), i;
 
     for (i in o2) {
       if (o2.hasOwnProperty(i)) {
         o[i] = o2[i];
       }
+    }
+
+    if (args.length) {
+      args.unshift(o);
+      extend.apply(this, args);
     }
 
     return o;
@@ -75,15 +80,15 @@ var Tanchor = (function (window, document, undefined) {
   };
 
   // **turn a key value pair into a string**
-  var stringify = function (key, val) {
+  var stringify = function (key, val, eq, sep) {
     var s = "", i, l;
 
     if (isArray(val)) {
       for (i = 0, l = val.length; i < l; i++) {
-        s += "&" + key + "=" + val[i];
+        s += sep + key + eq + val[i];
       }
     } else {
-      s += "&" + key + "=" + val;
+      s += sep + key + eq + val;
     }
 
     return s;
@@ -100,88 +105,120 @@ var Tanchor = (function (window, document, undefined) {
     }
   };
 
-  // **turn a search or hash into an object**
-  var toObject = function (s) {
-    var list = s && s.split("&") || [],
-        o = {}, i, l, pair;
-
-    for (i = 0, l = list.length; i < l; i++) {
-      pair = list[i].split("=");
-      append(o, pair[0], pair[1]);
-    }
-
-    return o;
-  };
-
-  // **turn an object into a str for search or hash**
-  var toString = function (o) {
-    var s = "", i;
-
-    for (i in o) {
-      if (o.hasOwnProperty(i)) {
-        s += stringify(i, o[i]);
-      }
-    }
-
-    return s.replace(/^\&/, "");
-  };
-
   // **cache**
   var cache = {};
 
-  // **get search and hash vars**
-  var getUrlVars = function (type) {
-    var vars;
+  // ## Private Methods
+  var privateMethods = {
 
-    if (cache.hasOwnProperty(this.href)) {
-      vars = cache[this.href];
-    } else {
-      vars = {
-        search: toObject(this.search.replace(/^\?/, "")),
-        hash: toObject(this.hash.replace(/^\#/, ""))
-      };
-    }
+    // ### toObject_
+    //
+    // turn a search or hash into an object
+    toObject_: function (type) {
+      var str, eq, sep, list,  map, i, l, pair;
 
-    cache[this.href] = vars;
-    return type ? vars[type] : vars;
-  };
-
-  // **set search and hash vars**
-  var setUrlVars = function (type, map) {
-    var vars = getUrlVars.call(this, type),
-        i;
-
-    for (i in map) {
-      if (map.hasOwnProperty(i)) {
-        update(vars, i, map[i]);
+      if (type === "search") {
+        str = this.search.replace(/^\?/, "");
+        eq = this.seq;
+        sep = this.ssp;
+      } else {
+        str = this.hash.replace(/^\#/, "");
+        eq = this.heq;
+        sep = this.hsp;
       }
-    }
 
-    return toString(vars);
+      list = str.split(sep);
+      map = {};
+
+      for (i = 0, l = list.length; i < l; i++) {
+        pair = list[i].split(eq);
+        append(map, pair[0], pair[1]);
+      }
+
+      return map;
+    },
+
+    // ### toString_
+    //
+    // turn an object into a str for search or hash
+    toString_: function (type, map) {
+      var str = "", eq, sep, i;
+
+      if (type === "search") {
+        eq = this.seq;
+        sep = this.ssp;
+      } else {
+        eq = this.heq;
+        sep = this.hsp;
+      }
+
+      for (i in map) {
+        if (map.hasOwnProperty(i)) {
+          str += stringify(i, map[i], eq, sep);
+        }
+      }
+
+      return str.replace(new RegExp("^\\" + sep), "");
+    },
+
+    // ### getUrlVars_
+    //
+    // get search and hash vars
+    getUrlVars_: function (type) {
+      var vars;
+
+      if (cache.hasOwnProperty(this.href)) {
+        vars = cache[this.href];
+      } else {
+        vars = {
+          search: this.toObject_("search"),
+          hash: this.toObject_("hash")
+        };
+      }
+
+      cache[this.href] = vars;
+      return type ? vars[type] : vars;
+    },
+
+    // ### setUrlVars_
+    //
+    // set search and hash vars
+    setUrlVars_: function (type, map) {
+      var vars = this.getUrlVars_(type),
+          i;
+
+      for (i in map) {
+        if (map.hasOwnProperty(i)) {
+          update(vars, i, map[i]);
+        }
+      }
+
+      return this.toString_(type, vars);
+    }
   };
 
   // ## Public Interface
-  var methods = {
+  var publicMethods = {
 
     // ### getSearchVars
     //
     // returns a key-value object with the parameters in the URL search
     getSearchVars: function () {
-      return getUrlVars.call(this, "search");
+      return this.getUrlVars_("search");
     },
 
     // ### getHashVars
     //
     // returns a key-value object with the parameters in the URL hash
     getHashVars: function () {
-      return getUrlVars.call(this, "hash");
+      return this.getUrlVars_("hash");
     },
 
     // ### setSearchVars
     //
     // sets parameters using a key-value object in the URL search; returns this
     setSearchVars: function (map) {
-      this.search = setUrlVars.call(this, "search", map);
+      this.search = this.setUrlVars_("search", map);
       return this;
     },
 
@@ -198,7 +235,7 @@ var Tanchor = (function (window, document, undefined) {
     //
     // sets parameters using a key-value object in the URL hash; returns this
     setHashVars: function (map) {
-      this.hash = setUrlVars.call(this, "hash", map);
+      this.hash = this.setUrlVars_("hash", map);
       return this;
     },
 
@@ -228,15 +265,19 @@ var Tanchor = (function (window, document, undefined) {
   };
 
   // **constructor and prototype**
-  var Anchor = function (href) {
+  var Anchor = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
     this.href = href;
+    this.seq = searchEq  || "=";
+    this.ssp = searchSep || "&";
+    this.heq = hashEq    || "=";
+    this.hsp = hashSep   || "&";
   };
 
-  Anchor.prototype = extend(anchor, methods);
+  Anchor.prototype = extend(anchor, privateMethods, publicMethods);
 
   // **return factory**
-  return function (href) {
-    return new Anchor(href);
+  return function (href, searchEq, searchSep, hashEq, hashSep) {
+    return new Anchor(href, searchEq, searchSep, hashEq, hashSep);
   };
 
 })(window, document);
