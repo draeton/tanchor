@@ -4,35 +4,7 @@
 //
 // Copyright 2012, Matthew Cobbs
 // MIT licensed
-//
-// ### Usage:
-//
-//     var a = new Tanchor("http://www.example.com?fruit=banana&pie=apple#page=1");
-//     a.href;   // "http://www.example.com?fruit=banana&pie=apple#page=1";
-//     a.search; // "?fruit=banana&pie=apple"
-//     a.hash;   // "#page=1"
-//
-//     a.getSearchVars(); // {"fruit": "banana", "pie": "apple"}
-//     a.getHashVars();   // {"page": "1"}
-//
-//     a.setSearchVars({fruit: "pear", type: "test"});
-//     a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=1"
-//
-//     a.setHashVars({page: 2});
-//     a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=2"
-//
-//     a.setSearchVar("type", "live");
-//     a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=2"
-//
-//     a.setHashVar("page", 3);
-//     a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=3"
-//
-//     a.delSearchVar("type");
-//     a.href; // "http://www.example.com/?fruit=pear&pie=apple#page=3"
-//
-//     a.delHashVar("page");
-//     a.href; // "http://www.example.com/?fruit=pear&pie=apple#"
-//
+/*global*/
 var Tanchor = (function (window, document, undefined) {
 
   "use strict";

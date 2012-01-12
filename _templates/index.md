@@ -5,8 +5,7 @@ title: Tanchor - The (anchor) URL parsing library
 
 <section id="main" role="main">
 
-[Tanchor](http://github.com/draeton/tanchor/) is a small utility library for working with URLs
-using the DOM's anchor element.
+[Tanchor](http://github.com/draeton/tanchor/) is a small utility library for working with URLs using the DOM's anchor element.
 
 
 ## Implementation
@@ -76,11 +75,3 @@ You can also clone the project with [Git](http://git-scm.com) by running:
     $ git clone git://github.com/draeton/tanchor
 
 </section>
-
-<script>
-Modernizr.load({
-    load: "/tanchor/tanchor/build/js/tanchor-@VERSION@-min.js",
-    complete: function () {
-    }
-});
-</script>

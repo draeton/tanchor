@@ -3,36 +3,8 @@
 <p><a href="http://draeton.github.com/tanchor">http://draeton.github.com/tanchor</a></p>
 
 <p>Copyright 2012, Matthew Cobbs
-MIT licensed</p>
-
-<h3>Usage:</h3>
-
-<pre><code>var a = new Tanchor("http://www.example.com?fruit=banana&amp;pie=apple#page=1");
-a.href;   // "http://www.example.com?fruit=banana&amp;pie=apple#page=1";
-a.search; // "?fruit=banana&amp;pie=apple"
-a.hash;   // "#page=1"
-
-a.getSearchVars(); // {"fruit": "banana", "pie": "apple"}
-a.getHashVars();   // {"page": "1"}
-
-a.setSearchVars({fruit: "pear", type: "test"});
-a.href; // "http://www.example.com/?fruit=pear&amp;pie=apple&amp;type=test#page=1"
-
-a.setHashVars({page: 2});
-a.href; // "http://www.example.com/?fruit=pear&amp;pie=apple&amp;type=test#page=2"
-
-a.setSearchVar("type", "live");
-a.href; // "http://www.example.com/?fruit=pear&amp;pie=apple&amp;type=live#page=2"
-
-a.setHashVar("page", 3);
-a.href; // "http://www.example.com/?fruit=pear&amp;pie=apple&amp;type=live#page=3"
-
-a.delSearchVar("type");
-a.href; // "http://www.example.com/?fruit=pear&amp;pie=apple#page=3"
-
-a.delHashVar("page");
-a.href; // "http://www.example.com/?fruit=pear&amp;pie=apple#"
-</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">Tanchor</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+MIT licensed</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*global*/</span>
+<span class="kd">var</span> <span class="nx">Tanchor</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
 
   <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
