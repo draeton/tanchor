@@ -13,7 +13,7 @@ title: Tanchor - The (anchor) URL parsing library
 Tanchor is a single-script utility.
 
 {% highlight html %}
-<script src="js/tanchor-0.7.25-min.js"></script>
+<script src="js/tanchor-0.7.27-min.js"></script>
 {% endhighlight %}
 
 Documentation is available [here.](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html)
@@ -65,7 +65,7 @@ a.href; // "http://www.example.com/?fruit=pear&pie=apple#"
 
 ## Download
 
-The latest release, **0.7.25 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.7.25.zip).**
+The latest release, **0.7.27 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.7.27.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/tanchor/zipball/master)
 or [tar](https://github.com/draeton/tanchor/tarball/master) formats.

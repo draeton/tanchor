@@ -77,12 +77,8 @@ var Tanchor = (function (window, document, undefined) {
     }
   };
 
-  // **cache**
-  var cache = {};
-
   // ## Private Methods
   var privateMethods = {
-
     // ### toObject_
     //
     // turn a search or hash into an object
@@ -139,8 +135,8 @@ var Tanchor = (function (window, document, undefined) {
     getUrlVars_: function (type) {
       var vars;
 
-      if (cache.hasOwnProperty(this.href)) {
-        vars = cache[this.href];
+      if (this.cache_.hasOwnProperty(this.href)) {
+        vars = this.cache_[this.href];
       } else {
         vars = {
           search: this.toObject_("search"),
@@ -148,7 +144,7 @@ var Tanchor = (function (window, document, undefined) {
         };
       }
 
-      cache[this.href] = vars;
+      this.cache_[this.href] = vars;
       return type ? vars[type] : vars;
     },
 
@@ -239,10 +235,18 @@ var Tanchor = (function (window, document, undefined) {
   // **constructor and prototype**
   var Anchor = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
     this.href = href;
+
+    if (typeof href === "undefined") {
+      throw new Error("The href argument must be defined.");
+    }
+
     this.seq = searchEq  || "=";
     this.ssp = searchSep || "&";
     this.heq = hashEq    || "=";
     this.hsp = hashSep   || "&";
+
+    // URL variable cache
+    this.cache_ = {};
   };
 
   Anchor.prototype = extend(anchor, privateMethods, publicMethods);

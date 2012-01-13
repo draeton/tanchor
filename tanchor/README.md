@@ -1,7 +1,7 @@
 ## Tanchor
 
 [Tanchor](http://draeton.github.com/tanchor/) is a small utility library for working with URLs using the DOM's anchor element.
-The current version is `0.7.25`. Documentation is available
+The current version is `0.7.27`. Documentation is available
 [here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html).
 
 
@@ -9,7 +9,7 @@ The current version is `0.7.25`. Documentation is available
 
 Tanchor is a single-script utility.
 
-    <script src="js/tanchor-0.7.25-min.js"></script>
+    <script src="js/tanchor-0.7.27-min.js"></script>
 
 
 ## Usage
