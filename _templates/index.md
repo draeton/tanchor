@@ -16,7 +16,8 @@ Tanchor is a single-script utility.
 <script src="js/tanchor-@VERSION@-min.js"></script>
 {% endhighlight %}
 
-Documentation is available [here.](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html)
+Documentation is available [here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html). Unit tests are available
+[here](http://draeton.github.com/tanchor/tanchor/tests/).
 
 
 ## Usage

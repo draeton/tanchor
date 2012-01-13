@@ -2,7 +2,8 @@
 
 [Tanchor](http://draeton.github.com/tanchor/) is a small utility library for working with URLs using the DOM's anchor element.
 The current version is `@VERSION@`. Documentation is available
-[here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html).
+[here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html). Unit tests are available
+[here](http://draeton.github.com/tanchor/tanchor/tests/).
 
 
 ## Implementation
