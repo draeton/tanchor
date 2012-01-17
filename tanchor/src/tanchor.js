@@ -241,10 +241,7 @@ var Tanchor = (function (window, document, undefined) {
     }
   }());
 
-  // **regular expression URL tests**
-  var skipTests = false;
-
-  /* test for protocol and domain */
+  // **regular expression URL test for protocol and domain**
   var regexPD = /^(http|https|ftp):\/\/([\w-\d]+\.)+[\w-\d]+/;
 
   // **constructor and prototype**
@@ -256,11 +253,9 @@ var Tanchor = (function (window, document, undefined) {
     this.anchor = this.a = document.createElement("a");
     this.a.href = href;
 
-    if (!skipTests) {
-      if (!regexPD.test(href)) {
-        // this forces the anchor to fill out the full path
-        this.a.protocol = location.protocol;
-      }
+    if (!regexPD.test(this.a.href)) {
+      // this forces the anchor to fill out the full path
+      this.a.protocol = location.protocol;
     }
 
     this.seq = searchEq  || "=";
@@ -270,12 +265,6 @@ var Tanchor = (function (window, document, undefined) {
   };
 
   Anchor.prototype = extend({}, nativeMethods, privateMethods, publicMethods);
-
-  // check whether relative paths return consistent values
-  (function () {
-    var t = new Anchor("/");
-    skipTests = t.hostname() === location.hostname;
-  }());
 
   // **return factory**
   return function (href, searchEq, searchSep, hashEq, hashSep) {

@@ -240,10 +240,7 @@ MIT licensed</p>             </td>             <td class="code">               <
     <span class="p">}</span>
   <span class="p">}());</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p><strong>regular expression URL tests</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
-  <span class="kd">var</span> <span class="nx">skipTests</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-
-  <span class="cm">/* test for protocol and domain */</span>
+</pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p><strong>regular expression URL test for protocol and domain</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="kd">var</span> <span class="nx">regexPD</span> <span class="o">=</span> <span class="sr">/^(http|https|ftp):\/\/([\w-\d]+\.)+[\w-\d]+/</span><span class="p">;</span>
 
 </pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p><strong>constructor and prototype</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
@@ -255,11 +252,9 @@ MIT licensed</p>             </td>             <td class="code">               <
     <span class="k">this</span><span class="p">.</span><span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">href</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">skipTests</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">regexPD</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">regexPD</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
 </pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>this forces the anchor to fill out the full path</p>             </td>             <td class="code">               <div class="highlight"><pre>
-        <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">;</span>
-      <span class="p">}</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">;</span>
     <span class="p">}</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">seq</span> <span class="o">=</span> <span class="nx">searchEq</span>  <span class="o">||</span> <span class="s2">&quot;=&quot;</span><span class="p">;</span>
@@ -270,13 +265,7 @@ MIT licensed</p>             </td>             <td class="code">               <
 
   <span class="nx">Anchor</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">({},</span> <span class="nx">nativeMethods</span><span class="p">,</span> <span class="nx">privateMethods</span><span class="p">,</span> <span class="nx">publicMethods</span><span class="p">);</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>check whether relative paths return consistent values</p>             </td>             <td class="code">               <div class="highlight"><pre>
-  <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Anchor</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
-    <span class="nx">skipTests</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">hostname</span><span class="p">()</span> <span class="o">===</span> <span class="nx">location</span><span class="p">.</span><span class="nx">hostname</span><span class="p">;</span>
-  <span class="p">}());</span>
-
-</pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p><strong>return factory</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
+</pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p><strong>return factory</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">href</span><span class="p">,</span> <span class="nx">searchEq</span><span class="p">,</span> <span class="nx">searchSep</span><span class="p">,</span> <span class="nx">hashEq</span><span class="p">,</span> <span class="nx">hashSep</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">Anchor</span><span class="p">(</span><span class="nx">href</span><span class="p">,</span> <span class="nx">searchEq</span><span class="p">,</span> <span class="nx">searchSep</span><span class="p">,</span> <span class="nx">hashEq</span><span class="p">,</span> <span class="nx">hashSep</span><span class="p">);</span>
   <span class="p">};</span>
