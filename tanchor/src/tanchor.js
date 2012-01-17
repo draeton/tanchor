@@ -243,6 +243,8 @@ var Tanchor = (function (window, document) {
   }());
 
   // **regular expression URL test for protocol and domain**
+  var regexP = /^(http|https|ftp):/;
+
   var regexPD = /^(http|https|ftp):\/\/([\w\-\d]+\.)+[\w\-\d]+/;
 
   // **constructor and prototype**
@@ -254,9 +256,14 @@ var Tanchor = (function (window, document) {
     this.anchor = this.a = document.createElement("a");
     this.anchor.href = href;
 
-    if (!regexPD.test(this.a.href)) {
+    if (!regexPD.test(this.anchor.href)) {
       // this forces the anchor to fill out the full path
-      this.anchor.protocol = location.protocol;
+      if (!regexP.test(this.anchor.protocol)) {
+        this.anchor.protocol = location.protocol;
+      }
+      if (!this.anchor.hostname) {
+        this.anchor.hostname = location.hostname;
+      }
     }
 
     this.seq = searchEq  || "=";
