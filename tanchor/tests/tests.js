@@ -42,7 +42,7 @@
         var t;
 
         t = new Tanchor(DEFAULT_URL);
-        equal(t.anchor.tagName, "A", "t.anchor referenches an Anchor Element.");
+        equal(t.anchor.tagName, "A", "t.anchor references an Anchor Element.");
         equal(t.anchor, t.a, "t.a is a shortcut for t.anchor.");
     });
 
