@@ -16,7 +16,7 @@
     });
 
 
-    test("Initialization", 5, function () {
+    test("Initialization", 4, function () {
         var t;
 
         raises(function () {
@@ -30,15 +30,31 @@
         t = new Tanchor(DEFAULT_URL);
         equal(t.href(), DEFAULT_URL, "Full path is returned when used as first argument.");
 
-        t = new Tanchor("/");
-        equal(t.hostname(), location.hostname, "Relative URL produces relative link.");
-
         t = new Tanchor("http://google.com");
         equal(t.hostname(), "google.com", "Absolute URL produces absolute link.");
     });
 
+    test("Partial URLs", 0, function () {
+        var t;
 
-    test("t.anchor OR t.a", 0, function () {
+        t = new Tanchor("/");
+        ok(t.pathname().indexOf("/") > -1, "Relative path with root");
+
+        t = new Tanchor("test.htm");
+        ok(t.pathname().indexOf("test.htm") > -1, "Relative path without root");
+
+        t = new Tanchor("?test=test");
+        ok(t.search().indexOf("?test=test") > -1, "Search only");
+
+        t = new Tanchor("#test");
+        ok(t.hash().indexOf("#test") > -1, "Hash only");
+
+        t = new Tanchor("//google.com");
+        equal(t.protocol(), location.protocol, "Protocol-relative");
+    })
+
+
+    test("t.anchor OR t.a", 2, function () {
         var t;
 
         t = new Tanchor(DEFAULT_URL);
