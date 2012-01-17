@@ -256,14 +256,12 @@ var Tanchor = (function (window, document) {
     this.anchor = this.a = document.createElement("a");
     this.anchor.href = href;
 
-    if (!regexPD.test(this.anchor.href)) {
-      // this forces the anchor to fill out the full path
-      if (!regexP.test(this.anchor.protocol)) {
-        this.anchor.protocol = location.protocol;
-      }
-      if (!this.anchor.hostname) {
-        this.anchor.hostname = location.hostname;
-      }
+    // this forces the anchor to fill out the full path
+    if (!regexP.test(this.anchor.protocol)) {
+      this.anchor.protocol = location.protocol;
+    }
+    if (!this.anchor.hostname) {
+      this.anchor.hostname = location.hostname;
     }
 
     console.log("HELP ME!")
