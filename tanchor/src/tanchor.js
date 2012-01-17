@@ -98,7 +98,9 @@ var Tanchor = (function (window, document) {
 
       for (i = 0, l = list.length; i < l; i++) {
         pair = list[i].split(eq);
-        append(map, pair[0], pair[1]);
+        if (pair[0] !== "") {
+          append(map, pair[0], pair[1]);
+        }
       }
 
       return map;
@@ -220,6 +222,11 @@ var Tanchor = (function (window, document) {
     // deletes the key parameter from the URL hash; returns this
     delHashVar: function (key) {
       return this.setHashVar(key);
+    },
+
+    // ### toString
+    toString: function () {
+      return this.anchor.href;
     }
   };
 
@@ -233,7 +240,7 @@ var Tanchor = (function (window, document) {
   var nativeMethods = (function () {
     var methods = {}, props, prop, i, l;
 
-    props = "href protocol host hostname port pathname search hash".split(" ");
+    props = ["href", "protocol", "host", "hostname", "port", "pathname", "search", "hash"];
     for (i = 0, l = props.length; i < l; i++) {
       prop = props[i];
       methods[prop] = nativeGetter(prop);
@@ -242,12 +249,12 @@ var Tanchor = (function (window, document) {
     return methods;
   }());
 
-  // **regular expression URL test for protocol and domain**
+  // ### regular expression URL test for protocol and domain
   var regexP = /^(http|https|ftp):/;
 
   var regexPD = /^(http|https|ftp):\/\/([\w\-\d]+\.)+[\w\-\d]+/;
 
-  // **constructor and prototype**
+  // ### constructor and prototype
   var Anchor = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
     if (typeof href === "undefined" || href === "") {
       throw new Error("The href argument must be defined and non-empty.");
@@ -272,9 +279,42 @@ var Tanchor = (function (window, document) {
 
   Anchor.prototype = extend({}, nativeMethods, privateMethods, publicMethods);
 
-  // **return factory**
-  return function (href, searchEq, searchSep, hashEq, hashSep) {
+  // ### factory
+  Anchor.factory = function (href, searchEq, searchSep, hashEq, hashSep) {
     return new Anchor(href, searchEq, searchSep, hashEq, hashSep);
   };
+
+  // ### getQuery
+  //
+  // Legacy method implemented for backwards compatibility
+  Anchor.factory.getQuery = function (key) {
+    var href = window.location.href,
+        t = new Anchor(href),
+        search = t.getSearchVars(),
+        hash = t.getHashVars(),
+        values = extend(search, hash),
+        result = {},
+        l;
+
+    if (typeof key === "string" && values[key]) {
+      return values[key];
+    }
+    if (isArray(key)) {
+      for (l = key.length; l--;) {
+        result[key[l]] = false;
+        if (values[key[l]]) {
+          result[key[l]] = values[key[l]];
+        }
+      }
+      return result;
+    }
+    if (typeof key === "undefined") {
+      return values;
+    }
+    return false;
+  };
+
+  // ### return factory
+  return Anchor.factory;
 
 }(window, document));
