@@ -4,8 +4,8 @@
 //
 // Copyright 2012, Matthew Cobbs
 // MIT licensed
-/*global*/
-var Tanchor = (function (window, document, undefined) {
+/*global */
+var Tanchor = (function (window, document) {
 
   "use strict";
 
@@ -67,7 +67,7 @@ var Tanchor = (function (window, document, undefined) {
   // **update the value of a key**
   var update = function (o, key, val) {
     if (isObject(o)) {
-      if (val === undefined) {
+      if (typeof val === "undefined") {
         delete o[key];
       } else {
         o[key] = val;
@@ -224,25 +224,26 @@ var Tanchor = (function (window, document, undefined) {
   };
 
   // ## Native Anchor properties as read-only methods
-  var nativeMethods = {};
+  var nativeGetter = function (prop) {
+    return function () {
+      return this.anchor[prop];
+    };
+  };
 
-  (function () {
-    var props, prop, i, l;
+  var nativeMethods = (function () {
+    var methods = {}, props, prop, i, l;
 
     props = "href protocol host hostname port pathname search hash".split(" ");
     for (i = 0, l = props.length; i < l; i++) {
       prop = props[i];
-
-      nativeMethods[prop] = (function (prop) {
-        return function () {
-          return this.anchor[prop];
-        };
-      }(prop));
+      methods[prop] = nativeGetter(prop);
     }
+
+    return methods;
   }());
 
   // **regular expression URL test for protocol and domain**
-  var regexPD = /^(http|https|ftp):\/\/([\w-\d]+\.)+[\w-\d]+/;
+  var regexPD = /^(http|https|ftp):\/\/([\w\-\d]+\.)+[\w\-\d]+/;
 
   // **constructor and prototype**
   var Anchor = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
@@ -251,11 +252,11 @@ var Tanchor = (function (window, document, undefined) {
     }
 
     this.anchor = this.a = document.createElement("a");
-    this.a.href = href;
+    this.anchor.href = href;
 
     if (!regexPD.test(this.a.href)) {
       // this forces the anchor to fill out the full path
-      this.a.protocol = location.protocol;
+      this.anchor.protocol = location.protocol;
     }
 
     this.seq = searchEq  || "=";
@@ -271,4 +272,4 @@ var Tanchor = (function (window, document, undefined) {
     return new Anchor(href, searchEq, searchSep, hashEq, hashSep);
   };
 
-})(window, document);
+}(window, document));
