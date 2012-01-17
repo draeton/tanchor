@@ -246,9 +246,6 @@ MIT licensed</p>             </td>             <td class="code">               <
   <span class="cm">/* test for protocol and domain */</span>
   <span class="kd">var</span> <span class="nx">regexPD</span> <span class="o">=</span> <span class="sr">/^(http|https|ftp):\/\/([\w-\d]+\.)+[\w-\d]+/</span><span class="p">;</span>
 
-  <span class="cm">/* test for just domain */</span>
-  <span class="kd">var</span> <span class="nx">regexD</span> <span class="o">=</span> <span class="sr">/^\/\/([\w-\d]+\.)+[\w-\d]+/</span><span class="p">;</span>
-
 </pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p><strong>constructor and prototype</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="kd">var</span> <span class="nx">Anchor</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">href</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">searchEq</span><span class="p">,</span> <span class="nx">searchSep</span><span class="p">,</span> <span class="nx">hashEq</span><span class="p">,</span> <span class="nx">hashSep</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">href</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">||</span> <span class="nx">href</span> <span class="o">===</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
@@ -259,7 +256,7 @@ MIT licensed</p>             </td>             <td class="code">               <
     <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">href</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">skipTests</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">regexPD</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">href</span><span class="p">)</span> <span class="o">||</span> <span class="nx">regexD</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">regexPD</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
 </pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>this forces the anchor to fill out the full path</p>             </td>             <td class="code">               <div class="highlight"><pre>
         <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">;</span>
       <span class="p">}</span>
