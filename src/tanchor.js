@@ -264,8 +264,6 @@ var Tanchor = (function (window, document) {
       this.anchor.hostname = location.hostname;
     }
 
-    console.log("HELP ME!")
-
     this.seq = searchEq  || "=";
     this.ssp = searchSep || "&";
     this.heq = hashEq    || "=";
