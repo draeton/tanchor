@@ -247,9 +247,6 @@ var Tanchor = (function (window, document, undefined) {
   /* test for protocol and domain */
   var regexPD = /^(http|https|ftp):\/\/([\w-\d]+\.)+[\w-\d]+/;
 
-  /* test for just domain */
-  var regexD = /^\/\/([\w-\d]+\.)+[\w-\d]+/;
-
   // **constructor and prototype**
   var Anchor = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
     if (typeof href === "undefined" || href === "") {
@@ -260,7 +257,7 @@ var Tanchor = (function (window, document, undefined) {
     this.a.href = href;
 
     if (!skipTests) {
-      if (regexPD.test(href) || regexD.test(href)) {
+      if (!regexPD.test(href)) {
         // this forces the anchor to fill out the full path
         this.a.protocol = location.protocol;
       }
