@@ -9,8 +9,6 @@ var Tanchor = (function (window, document, undefined) {
 
   "use strict";
 
-  var anchor = document.createElement("a");
-
   // **type check**
   var isObject = function (o) {
     return typeof o === "object" && o !== null;
@@ -86,11 +84,11 @@ var Tanchor = (function (window, document, undefined) {
       var str, eq, sep, list,  map, i, l, pair;
 
       if (type === "search") {
-        str = this.search.replace(/^\?/, "");
+        str = this.anchor.search.replace(/^\?/, "");
         eq = this.seq;
         sep = this.ssp;
       } else {
-        str = this.hash.replace(/^\#/, "");
+        str = this.anchor.hash.replace(/^\#/, "");
         eq = this.heq;
         sep = this.hsp;
       }
@@ -135,16 +133,11 @@ var Tanchor = (function (window, document, undefined) {
     getUrlVars_: function (type) {
       var vars;
 
-      if (this.cache_.hasOwnProperty(this.href)) {
-        vars = this.cache_[this.href];
-      } else {
-        vars = {
-          search: this.toObject_("search"),
-          hash: this.toObject_("hash")
-        };
-      }
+      vars = {
+        search: this.toObject_("search"),
+        hash: this.toObject_("hash")
+      };
 
-      this.cache_[this.href] = vars;
       return type ? vars[type] : vars;
     },
 
@@ -167,7 +160,6 @@ var Tanchor = (function (window, document, undefined) {
 
   // ## Public Interface
   var publicMethods = {
-
     // ### getSearchVars
     //
     // returns a key-value object with the parameters in the URL search
@@ -186,7 +178,7 @@ var Tanchor = (function (window, document, undefined) {
     //
     // sets parameters using a key-value object in the URL search; returns this
     setSearchVars: function (map) {
-      this.search = this.setUrlVars_("search", map);
+      this.anchor.search = this.setUrlVars_("search", map);
       return this;
     },
 
@@ -203,7 +195,7 @@ var Tanchor = (function (window, document, undefined) {
     //
     // sets parameters using a key-value object in the URL hash; returns this
     setHashVars: function (map) {
-      this.hash = this.setUrlVars_("hash", map);
+      this.anchor.hash = this.setUrlVars_("hash", map);
       return this;
     },
 
@@ -229,27 +221,42 @@ var Tanchor = (function (window, document, undefined) {
     delHashVar: function (key) {
       return this.setHashVar(key);
     }
-
   };
+
+  // ## Native Anchor properties as read-only methods
+  var nativeMethods = {};
+
+  (function () {
+    var props, prop, i, l;
+
+    props = "href protocol host hostname port pathname search hash".split(" ");
+    for (i = 0, l = props.length; i < l; i++) {
+      prop = props[i];
+
+      nativeMethods[prop] = (function (prop) {
+        return function () {
+          return this.anchor[prop];
+        };
+      }(prop));
+    }
+  }());
 
   // **constructor and prototype**
   var Anchor = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
-    this.href = href;
-
-    if (typeof href === "undefined") {
-      throw new Error("The href argument must be defined.");
+    if (typeof href === "undefined" || href === "") {
+      throw new Error("The href argument must be defined and non-empty.");
     }
+
+    this.anchor = this.a = document.createElement("a");
+    this.a.href = href;
 
     this.seq = searchEq  || "=";
     this.ssp = searchSep || "&";
     this.heq = hashEq    || "=";
     this.hsp = hashSep   || "&";
-
-    // URL variable cache
-    this.cache_ = {};
   };
 
-  Anchor.prototype = extend(anchor, privateMethods, publicMethods);
+  Anchor.prototype = extend({}, nativeMethods, privateMethods, publicMethods);
 
   // **return factory**
   return function (href, searchEq, searchSep, hashEq, hashSep) {

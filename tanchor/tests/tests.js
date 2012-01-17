@@ -12,36 +12,49 @@
 
 
     test("Dependencies", 1, function () {
-        ok(Tanchor, "Deeplink exists.");
+        ok(Tanchor, "Tanchor exists.");
     });
 
 
-    test("Initialization", 4, function () {
-        var a;
+    test("Initialization", 5, function () {
+        var t;
 
         raises(function () {
-                a = new Tanchor()
-            }, Error, "No arguments raises exception.");
+                t = new Tanchor()
+            }, "No arguments raises exception.");
 
-        a = new Tanchor("");
-        equal(a.href, location.href, "Empty string produces window.location.href link");
+        raises(function () {
+                t = new Tanchor("")
+            }, "Empty string href raises exception because behavior is unpredictable.");
 
-        a = new Tanchor("/");
-        equal(a.hostname, location.hostname, "Relative URL produces relative link.");
+        t = new Tanchor(DEFAULT_URL);
+        equal(t.href(), DEFAULT_URL, "Full path is returned when used as first argument.");
 
-        a = new Tanchor("http://google.com");
-        equal(a.hostname, "google.com", "Absolute URL produces absolute link.");
+        t = new Tanchor("/");
+        equal(t.hostname(), location.hostname, "Relative URL produces relative link.");
+
+        t = new Tanchor("http://google.com");
+        equal(t.hostname(), "google.com", "Absolute URL produces absolute link.");
+    });
+
+
+    test("t.anchor OR t.a", 0, function () {
+        var t;
+
+        t = new Tanchor(DEFAULT_URL);
+        equal(t.anchor.tagName, "A", "t.anchor referenches an Anchor Element.");
+        equal(t.anchor, t.a, "t.a is a shortcut for t.anchor.");
     });
 
 
     test("Custom operators", 2, function () {
-        var a;
+        var t;
 
-        a = new Tanchor("");
-        equal(a.seq+a.ssp+a.heq+a.hsp, "=&=&", "Default equality and separator values are =, &, =, &");
+        t = new Tanchor(DEFAULT_URL);
+        equal(t.seq+t.ssp+t.heq+t.hsp, "=&=&", "Default equality and separator values are =, &, =, &");
 
-        a = new Tanchor("", ":", "/", "-", "|");
-        equal(a.seq+a.ssp+a.heq+a.hsp, ":/-|", "Equality and separator values are :, /, -, |");
+        t = new Tanchor(DEFAULT_URL, ":", "/", "-", "|");
+        equal(t.seq+t.ssp+t.heq+t.hsp, ":/-|", "Equality and separator values are :, /, -, |");
     });
 
 
@@ -52,176 +65,176 @@
 
         expect(props.length);
 
-        var a = new Tanchor(DEFAULT_URL);
+        var t = new Tanchor(DEFAULT_URL);
 
-        var anchor = document.createElement("a");
-        anchor.href = DEFAULT_URL;
+        var a = document.createElement("a");
+        a.href = DEFAULT_URL;
 
         while (prop = props[i++]) {
-            equal(a[prop], anchor[prop], "Property: " + prop);
+            equal(t[prop](), a[prop], "t." + prop + "()");
         }
     });
 
 
     test("getSearchVars()", 6, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor("http://www.example.com/");
-        v = a.getSearchVars();
+        t = new Tanchor("http://www.example.com/");
+        v = t.getSearchVars();
         expected = {};
         equal(JSON.stringify(v), JSON.stringify(expected), "Empty object");
 
-        a = new Tanchor(DEFAULT_URL);
-        v = a.getSearchVars();
+        t = new Tanchor(DEFAULT_URL);
+        v = t.getSearchVars();
         expected = {"fruit": "banana", "pie": "apple"};
         equal(JSON.stringify(v), JSON.stringify(expected), "Simple map of keys and values");
 
-        a = new Tanchor("http://www.example.com/?fruit=banana&fruit=pear&pie=apple#fruit=banana&pie=apple");
-        v = a.getSearchVars();
+        t = new Tanchor("http://www.example.com/?fruit=banana&fruit=pear&pie=apple#fruit=banana&pie=apple");
+        v = t.getSearchVars();
         expected = {"fruit": ["banana", "pear"], "pie": "apple"};
         equal(JSON.stringify(v.fruit), JSON.stringify(expected.fruit), "Array for duplicate parameters");
 
-        a = new Tanchor("http://www.example.com/?fruit&pie=apple#fruit=banana&pie=apple");
-        v = a.getSearchVars();
+        t = new Tanchor("http://www.example.com/?fruit&pie=apple#fruit=banana&pie=apple");
+        v = t.getSearchVars();
         ok(v.hasOwnProperty("fruit"), "Undefined value in object for key-only parameter");
         equal(v.fruit, undefined, "Undefined value in object for key-only parameter");
 
-        a = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple", ":", "/");
-        v = a.getSearchVars();
+        t = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple", ":", "/");
+        v = t.getSearchVars();
         expected = {"fruit": "banana", "pie": "apple"};
         equal(JSON.stringify(v), JSON.stringify(expected), "Custom operators: Simple map of keys and values");
     });
 
 
     test("getHashVars()", 6, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor("http://www.example.com/");
-        v = a.getHashVars();
+        t = new Tanchor("http://www.example.com/");
+        v = t.getHashVars();
         expected = {};
         equal(JSON.stringify(v), JSON.stringify(expected), "Empty object");
 
-        a = new Tanchor(DEFAULT_URL);
-        v = a.getHashVars();
+        t = new Tanchor(DEFAULT_URL);
+        v = t.getHashVars();
         expected = {"fruit": "banana", "pie": "apple"};
         equal(JSON.stringify(v), JSON.stringify(expected), "Simple map of keys and values");
 
-        a = new Tanchor("http://www.example.com/?fruit=banana&pie=apple#fruit=banana&fruit=pear&pie=apple");
-        v = a.getHashVars();
+        t = new Tanchor("http://www.example.com/?fruit=banana&pie=apple#fruit=banana&fruit=pear&pie=apple");
+        v = t.getHashVars();
         expected = {"fruit": ["banana", "pear"], "pie": "apple"};
         equal(JSON.stringify(v.fruit), JSON.stringify(expected.fruit), "Array for duplicate parameters");
 
-        a = new Tanchor("http://www.example.com/?fruit=banana&pie=apple#fruit&pie=apple");
-        v = a.getHashVars();
+        t = new Tanchor("http://www.example.com/?fruit=banana&pie=apple#fruit&pie=apple");
+        v = t.getHashVars();
         ok(v.hasOwnProperty("fruit"), "Undefined value in object for key-only parameter");
         equal(v.fruit, undefined, "Undefined value in object for key-only parameter");
 
-        a = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple", null, null, ":", "/");
-        v = a.getHashVars();
+        t = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple", null, null, ":", "/");
+        v = t.getHashVars();
         expected = {"fruit": "banana", "pie": "apple"};
         equal(JSON.stringify(v), JSON.stringify(expected), "Custom operators: Simple map of keys and values");
     });
 
 
     test("setSearchVars()", 3, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setSearchVars({"fruit": "pear"});
+        t = new Tanchor(DEFAULT_URL);
+        t.setSearchVars({"fruit": "pear"});
         expected = "http://www.example.com/?fruit=pear&pie=apple#fruit=banana&pie=apple";
-        equal(a.href, expected, "Object with existing property updates parameter");
+        equal(t.href(), expected, "Object with existing property updates parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setSearchVars({"type": "test"});
+        t = new Tanchor(DEFAULT_URL);
+        t.setSearchVars({"type": "test"});
         expected = "http://www.example.com/?fruit=banana&pie=apple&type=test#fruit=banana&pie=apple";
-        equal(a.href, expected, "Object with new property adds parameter");
+        equal(t.href(), expected, "Object with new property adds parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setSearchVars({"fruit": undefined});
+        t = new Tanchor(DEFAULT_URL);
+        t.setSearchVars({"fruit": undefined});
         expected = "http://www.example.com/?pie=apple#fruit=banana&pie=apple";
-        equal(a.href, expected, "Object with undefined property deletes parameter");
+        equal(t.href(), expected, "Object with undefined property deletes parameter");
     });
 
 
     test("setHashVars()", 3, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setHashVars({"fruit": "pear"});
+        t = new Tanchor(DEFAULT_URL);
+        t.setHashVars({"fruit": "pear"});
         expected = "http://www.example.com/?fruit=banana&pie=apple#fruit=pear&pie=apple";
-        equal(a.href, expected, "Object with existing property updates parameter");
+        equal(t.href(), expected, "Object with existing property updates parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setHashVars({"type": "test"});
+        t = new Tanchor(DEFAULT_URL);
+        t.setHashVars({"type": "test"});
         expected = "http://www.example.com/?fruit=banana&pie=apple#fruit=banana&pie=apple&type=test";
-        equal(a.href, expected, "Object with new property adds parameter");
+        equal(t.href(), expected, "Object with new property adds parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setHashVars({"fruit": undefined});
+        t = new Tanchor(DEFAULT_URL);
+        t.setHashVars({"fruit": undefined});
         expected = "http://www.example.com/?fruit=banana&pie=apple#pie=apple";
-        equal(a.href, expected, "Object with undefined property deletes parameter");
+        equal(t.href(), expected, "Object with undefined property deletes parameter");
     });
 
 
     test("setSearchVar()", 3, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setSearchVar("fruit", "pear");
+        t = new Tanchor(DEFAULT_URL);
+        t.setSearchVar("fruit", "pear");
         expected = "http://www.example.com/?fruit=pear&pie=apple#fruit=banana&pie=apple";
-        equal(a.href, expected, "Existing key updates parameter");
+        equal(t.href(), expected, "Existing key updates parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setSearchVar("type", "test");
+        t = new Tanchor(DEFAULT_URL);
+        t.setSearchVar("type", "test");
         expected = "http://www.example.com/?fruit=banana&pie=apple&type=test#fruit=banana&pie=apple";
-        equal(a.href, expected, "New key adds parameter");
+        equal(t.href(), expected, "New key adds parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setSearchVar("fruit");
+        t = new Tanchor(DEFAULT_URL);
+        t.setSearchVar("fruit");
         expected = "http://www.example.com/?pie=apple#fruit=banana&pie=apple";
-        equal(a.href, expected, "Key undefined value deletes parameter");
+        equal(t.href(), expected, "Key undefined value deletes parameter");
     });
 
 
     test("setHashVar()", 3, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setHashVar("fruit", "pear");
+        t = new Tanchor(DEFAULT_URL);
+        t.setHashVar("fruit", "pear");
         expected = "http://www.example.com/?fruit=banana&pie=apple#fruit=pear&pie=apple";
-        equal(a.href, expected, "Existing key updates parameter");
+        equal(t.href(), expected, "Existing key updates parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setHashVar("type", "test");
+        t = new Tanchor(DEFAULT_URL);
+        t.setHashVar("type", "test");
         expected = "http://www.example.com/?fruit=banana&pie=apple#fruit=banana&pie=apple&type=test";
-        equal(a.href, expected, "New key adds parameter");
+        equal(t.href(), expected, "New key adds parameter");
 
-        a = new Tanchor(DEFAULT_URL);
-        a.setHashVar("fruit");
+        t = new Tanchor(DEFAULT_URL);
+        t.setHashVar("fruit");
         expected = "http://www.example.com/?fruit=banana&pie=apple#pie=apple";
-        equal(a.href, expected, "Key undefined value deletes parameter");
+        equal(t.href(), expected, "Key undefined value deletes parameter");
 
     });
 
 
     test("delSearchVar()", 1, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor(DEFAULT_URL);
-        a.delSearchVar("fruit");
+        t = new Tanchor(DEFAULT_URL);
+        t.delSearchVar("fruit");
         expected = "http://www.example.com/?pie=apple#fruit=banana&pie=apple";
-        equal(a.href, expected, "Deletes parameter");
+        equal(t.href(), expected, "Deletes parameter");
 
     });
 
 
     test("delHashVar()", 1, function () {
-        var a, v, expected;
+        var t, v, expected;
 
-        a = new Tanchor(DEFAULT_URL);
-        a.delHashVar("fruit");
+        t = new Tanchor(DEFAULT_URL);
+        t.delHashVar("fruit");
         expected = "http://www.example.com/?fruit=banana&pie=apple#pie=apple";
-        equal(a.href, expected, "Key undefined value deletes parameter");
+        equal(t.href(), expected, "Key undefined value deletes parameter");
     });
 
 

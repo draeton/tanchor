@@ -13,7 +13,7 @@ title: Tanchor - The (anchor) URL parsing library
 Tanchor is a single-script utility.
 
 {% highlight html %}
-<script src="js/tanchor-0.8.29-min.js"></script>
+<script src="js/tanchor-0.8.31-min.js"></script>
 {% endhighlight %}
 
 Documentation is available [here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html). Unit tests are available
@@ -24,30 +24,30 @@ Documentation is available [here](http://draeton.github.com/tanchor/tanchor/docs
 
 {% highlight js %}
 var a = new Tanchor("http://www.example.com?fruit=banana&pie=apple#page=1");
-a.href;   // "http://www.example.com?fruit=banana&pie=apple#page=1";
-a.search; // "?fruit=banana&pie=apple"
-a.hash;   // "#page=1"
+a.href();   // "http://www.example.com?fruit=banana&pie=apple#page=1";
+a.search(); // "?fruit=banana&pie=apple"
+a.hash();   // "#page=1"
 
 a.getSearchVars(); // {"fruit": "banana", "pie": "apple"}
 a.getHashVars();   // {"page": "1"}
 
 a.setSearchVars({fruit: "pear", type: "test"});
-a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=1"
+a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=1"
 
 a.setHashVars({page: 2});
-a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=2"
+a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=2"
 
 a.setSearchVar("type", "live");
-a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=2"
+a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=2"
 
 a.setHashVar("page", 3);
-a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=3"
+a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=3"
 
 a.delSearchVar("type");
-a.href; // "http://www.example.com/?fruit=pear&pie=apple#page=3"
+a.href(); // "http://www.example.com/?fruit=pear&pie=apple#page=3"
 
 a.delHashVar("page");
-a.href; // "http://www.example.com/?fruit=pear&pie=apple#"
+a.href(); // "http://www.example.com/?fruit=pear&pie=apple#"
 {% endhighlight %}
 
 
@@ -66,7 +66,7 @@ a.href; // "http://www.example.com/?fruit=pear&pie=apple#"
 
 ## Download
 
-The latest release, **0.8.29 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.8.29.zip).**
+The latest release, **0.8.31 is [available here](http://draeton.github.com/tanchor/tanchor/dist/tanchor-0.8.31.zip).**
 
 You can download this project in either [zip](https://github.com/draeton/tanchor/zipball/master)
 or [tar](https://github.com/draeton/tanchor/tarball/master) formats.

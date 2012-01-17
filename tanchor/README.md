@@ -1,7 +1,7 @@
 ## Tanchor
 
 [Tanchor](http://draeton.github.com/tanchor/) is a small utility library for working with URLs using the DOM's anchor element.
-The current version is `0.8.29`. Documentation is available
+The current version is `0.8.31`. Documentation is available
 [here](http://draeton.github.com/tanchor/tanchor/docs/tanchor.html). Unit tests are available
 [here](http://draeton.github.com/tanchor/tanchor/tests/).
 
@@ -10,36 +10,36 @@ The current version is `0.8.29`. Documentation is available
 
 Tanchor is a single-script utility.
 
-    <script src="js/tanchor-0.8.29-min.js"></script>
+    <script src="js/tanchor-0.8.31-min.js"></script>
 
 
 ## Usage
 
     var a = new Tanchor("http://www.example.com?fruit=banana&pie=apple#page=1");
-    a.href;   // "http://www.example.com?fruit=banana&pie=apple#page=1";
-    a.search; // "?fruit=banana&pie=apple"
-    a.hash;   // "#page=1"
+    a.href();   // "http://www.example.com?fruit=banana&pie=apple#page=1";
+    a.search(); // "?fruit=banana&pie=apple"
+    a.hash();   // "#page=1"
 
     a.getSearchVars(); // {"fruit": "banana", "pie": "apple"}
     a.getHashVars();   // {"page": "1"}
 
     a.setSearchVars({fruit: "pear", type: "test"});
-    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=1"
+    a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=1"
 
     a.setHashVars({page: 2});
-    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=2"
+    a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=test#page=2"
 
     a.setSearchVar("type", "live");
-    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=2"
+    a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=2"
 
     a.setHashVar("page", 3);
-    a.href; // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=3"
+    a.href(); // "http://www.example.com/?fruit=pear&pie=apple&type=live#page=3"
 
     a.delSearchVar("type");
-    a.href; // "http://www.example.com/?fruit=pear&pie=apple#page=3"
+    a.href(); // "http://www.example.com/?fruit=pear&pie=apple#page=3"
 
     a.delHashVar("page");
-    a.href; // "http://www.example.com/?fruit=pear&pie=apple#"
+    a.href(); // "http://www.example.com/?fruit=pear&pie=apple#"
 
 
 ## License

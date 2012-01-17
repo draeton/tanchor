@@ -8,8 +8,6 @@ MIT licensed</p>             </td>             <td class="code">               <
 
   <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
 
-  <span class="kd">var</span> <span class="nx">anchor</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
-
 </pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p><strong>type check</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="kd">var</span> <span class="nx">isObject</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">typeof</span> <span class="nx">o</span> <span class="o">===</span> <span class="s2">&quot;object&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">o</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">;</span>
@@ -85,11 +83,11 @@ MIT licensed</p>             </td>             <td class="code">               <
       <span class="kd">var</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">eq</span><span class="p">,</span> <span class="nx">sep</span><span class="p">,</span> <span class="nx">list</span><span class="p">,</span>  <span class="nx">map</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">pair</span><span class="p">;</span>
 
       <span class="k">if</span> <span class="p">(</span><span class="nx">type</span> <span class="o">===</span> <span class="s2">&quot;search&quot;</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">str</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\?/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+        <span class="nx">str</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\?/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
         <span class="nx">eq</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">seq</span><span class="p">;</span>
         <span class="nx">sep</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">ssp</span><span class="p">;</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">str</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\#/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
+        <span class="nx">str</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\#/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">);</span>
         <span class="nx">eq</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">heq</span><span class="p">;</span>
         <span class="nx">sep</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">hsp</span><span class="p">;</span>
       <span class="p">}</span>
@@ -134,16 +132,11 @@ MIT licensed</p>             </td>             <td class="code">               <
     <span class="nx">getUrlVars_</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">vars</span><span class="p">;</span>
 
-      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">cache_</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">href</span><span class="p">))</span> <span class="p">{</span>
-        <span class="nx">vars</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cache_</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">href</span><span class="p">];</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">vars</span> <span class="o">=</span> <span class="p">{</span>
-          <span class="nx">search</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">toObject_</span><span class="p">(</span><span class="s2">&quot;search&quot;</span><span class="p">),</span>
-          <span class="nx">hash</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">toObject_</span><span class="p">(</span><span class="s2">&quot;hash&quot;</span><span class="p">)</span>
-        <span class="p">};</span>
-      <span class="p">}</span>
+      <span class="nx">vars</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">search</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">toObject_</span><span class="p">(</span><span class="s2">&quot;search&quot;</span><span class="p">),</span>
+        <span class="nx">hash</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">toObject_</span><span class="p">(</span><span class="s2">&quot;hash&quot;</span><span class="p">)</span>
+      <span class="p">};</span>
 
-      <span class="k">this</span><span class="p">.</span><span class="nx">cache_</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">href</span><span class="p">]</span> <span class="o">=</span> <span class="nx">vars</span><span class="p">;</span>
       <span class="k">return</span> <span class="nx">type</span> <span class="o">?</span> <span class="nx">vars</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">:</span> <span class="nx">vars</span><span class="p">;</span>
     <span class="p">},</span>
 
@@ -166,7 +159,6 @@ MIT licensed</p>             </td>             <td class="code">               <
 
 </pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <h2>Public Interface</h2>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="kd">var</span> <span class="nx">publicMethods</span> <span class="o">=</span> <span class="p">{</span>
-
 </pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <h3>getSearchVars</h3>
 
 <p>returns a key-value object with the parameters in the URL search</p>             </td>             <td class="code">               <div class="highlight"><pre>
@@ -185,7 +177,7 @@ MIT licensed</p>             </td>             <td class="code">               <
 
 <p>sets parameters using a key-value object in the URL search; returns this</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">setSearchVars</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setUrlVars_</span><span class="p">(</span><span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">search</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setUrlVars_</span><span class="p">(</span><span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
 
@@ -202,7 +194,7 @@ MIT licensed</p>             </td>             <td class="code">               <
 
 <p>sets parameters using a key-value object in the URL hash; returns this</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">setHashVars</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setUrlVars_</span><span class="p">(</span><span class="s2">&quot;hash&quot;</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">anchor</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">setUrlVars_</span><span class="p">(</span><span class="s2">&quot;hash&quot;</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
 
@@ -228,27 +220,42 @@ MIT licensed</p>             </td>             <td class="code">               <
     <span class="nx">delHashVar</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">setHashVar</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
     <span class="p">}</span>
-
   <span class="p">};</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p><strong>constructor and prototype</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
-  <span class="kd">var</span> <span class="nx">Anchor</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">href</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">searchEq</span><span class="p">,</span> <span class="nx">searchSep</span><span class="p">,</span> <span class="nx">hashEq</span><span class="p">,</span> <span class="nx">hashSep</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">href</span><span class="p">;</span>
+</pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <h2>Native Anchor properties as read-only methods</h2>             </td>             <td class="code">               <div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">nativeMethods</span> <span class="o">=</span> <span class="p">{};</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">href</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;The href argument must be defined.&quot;</span><span class="p">);</span>
+  <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">props</span><span class="p">,</span> <span class="nx">prop</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">l</span><span class="p">;</span>
+
+    <span class="nx">props</span> <span class="o">=</span> <span class="s2">&quot;href protocol host hostname port pathname search hash&quot;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">prop</span> <span class="o">=</span> <span class="nx">props</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+
+      <span class="nx">nativeMethods</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">anchor</span><span class="p">[</span><span class="nx">prop</span><span class="p">];</span>
+        <span class="p">};</span>
+      <span class="p">}(</span><span class="nx">prop</span><span class="p">));</span>
     <span class="p">}</span>
+  <span class="p">}());</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p><strong>constructor and prototype</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">Anchor</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">href</span><span class="p">,</span> <span class="cm">/* optional */</span> <span class="nx">searchEq</span><span class="p">,</span> <span class="nx">searchSep</span><span class="p">,</span> <span class="nx">hashEq</span><span class="p">,</span> <span class="nx">hashSep</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">href</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span> <span class="o">||</span> <span class="nx">href</span> <span class="o">===</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;The href argument must be defined and non-empty.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">anchor</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">href</span><span class="p">;</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">seq</span> <span class="o">=</span> <span class="nx">searchEq</span>  <span class="o">||</span> <span class="s2">&quot;=&quot;</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">ssp</span> <span class="o">=</span> <span class="nx">searchSep</span> <span class="o">||</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">heq</span> <span class="o">=</span> <span class="nx">hashEq</span>    <span class="o">||</span> <span class="s2">&quot;=&quot;</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">hsp</span> <span class="o">=</span> <span class="nx">hashSep</span>   <span class="o">||</span> <span class="s2">&quot;&amp;&quot;</span><span class="p">;</span>
-
-</pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>URL variable cache</p>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="k">this</span><span class="p">.</span><span class="nx">cache_</span> <span class="o">=</span> <span class="p">{};</span>
   <span class="p">};</span>
 
-  <span class="nx">Anchor</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">anchor</span><span class="p">,</span> <span class="nx">privateMethods</span><span class="p">,</span> <span class="nx">publicMethods</span><span class="p">);</span>
+  <span class="nx">Anchor</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">({},</span> <span class="nx">nativeMethods</span><span class="p">,</span> <span class="nx">privateMethods</span><span class="p">,</span> <span class="nx">publicMethods</span><span class="p">);</span>
 
 </pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p><strong>return factory</strong></p>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">href</span><span class="p">,</span> <span class="nx">searchEq</span><span class="p">,</span> <span class="nx">searchSep</span><span class="p">,</span> <span class="nx">hashEq</span><span class="p">,</span> <span class="nx">hashSep</span><span class="p">)</span> <span class="p">{</span>
