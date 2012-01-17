@@ -266,6 +266,8 @@ var Tanchor = (function (window, document) {
       }
     }
 
+    console.log("HELP ME!")
+
     this.seq = searchEq  || "=";
     this.ssp = searchSep || "&";
     this.heq = hashEq    || "=";
