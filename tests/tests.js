@@ -34,20 +34,20 @@
         equal(t.hostname(), "google.com", "Absolute URL produces absolute link.");
     });
 
-    test("Partial URLs", 0, function () {
+    test("Partial URLs", 5, function () {
         var t;
 
-        t = new Tanchor("/");
-        ok(t.pathname().indexOf("/") > -1, "Relative path with root");
+        t = new Tanchor("/testing/tests");
+        ok(/testing\/tests$/.test(t.pathname()), "Relative path with root");
 
         t = new Tanchor("test.htm");
-        ok(t.pathname().indexOf("test.htm") > -1, "Relative path without root");
+        ok(/test\.htm$/.test(t.pathname()), "Relative path without root");
 
         t = new Tanchor("?test=test");
-        ok(t.search().indexOf("?test=test") > -1, "Search only");
+        ok(/^\?test=test$/.test(t.search()), "Search only");
 
         t = new Tanchor("#test");
-        ok(t.hash().indexOf("#test") > -1, "Hash only");
+        ok(/^\#test$/.test(t.hash()), "Hash only");
 
         t = new Tanchor("//google.com");
         equal(t.protocol(), location.protocol, "Protocol-relative");
