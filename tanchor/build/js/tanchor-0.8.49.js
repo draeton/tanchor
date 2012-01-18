@@ -5,7 +5,7 @@
 // Copyright 2012, Matthew Cobbs
 // MIT licensed
 /*global */
-var Tanchor = (function (window, document) {
+var Tanchor = (function (window, document, location) {
 
   "use strict";
 
@@ -178,18 +178,12 @@ var Tanchor = (function (window, document) {
 
     // ### getUrlVars
     //
-    // return combined url variables, hash first or last
-    getUrlVars: function (hashFirst) {
+    // return combined url variables
+    getUrlVars: function () {
       var vars = this.getUrlVars_(),
           search = vars.search,
           hash = vars.hash,
-          combined;
-
-      if (hashFirst) {
-        combined = extend(hash, search);
-      } else {
-        combined = extend(search, hash);
-      }
+          combined = extend(search, hash);
 
       return combined;
     },
@@ -298,7 +292,7 @@ var Tanchor = (function (window, document) {
   Anchor.prototype = extend({}, nativeMethods, privateMethods, publicMethods);
 
   // ### factory
-  Anchor.factory = function (href, searchEq, searchSep, hashEq, hashSep) {
+  Anchor.factory = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
     return new Anchor(href, searchEq, searchSep, hashEq, hashSep);
   };
 
@@ -306,7 +300,7 @@ var Tanchor = (function (window, document) {
   //
   // Legacy method implemented for backwards compatibility
   Anchor.factory.getQuery = function (key) {
-    var href = window.location.href,
+    var href = location.href,
         t = new Anchor(href),
         vars = t.getUrlVars(),
         result = {},
@@ -333,4 +327,4 @@ var Tanchor = (function (window, document) {
   // ### return factory
   return Anchor.factory;
 
-}(window, document));
+}(window, document, location));
