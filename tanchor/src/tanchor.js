@@ -176,10 +176,10 @@ var Tanchor = (function (window, document) {
       return this.getUrlVars_("hash");
     },
 
-    // ### getVars
+    // ### getUrlVars
     //
     // return combined url variables, hash first or last
-    getVars: function (hashFirst) {
+    getUrlVars: function (hashFirst) {
       var vars = this.getUrlVars_(),
           search = vars.search,
           hash = vars.hash,
@@ -308,7 +308,7 @@ var Tanchor = (function (window, document) {
   Anchor.factory.getQuery = function (key) {
     var href = window.location.href,
         t = new Anchor(href),
-        vars = t.getVars(),
+        vars = t.getUrlVars(),
         result = {},
         l;
 
