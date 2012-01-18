@@ -255,24 +255,13 @@ var Tanchor = (function (window, document) {
     };
   };
 
-  /* fix for pathname leading slash in IE */
-  var pathnameGetter = function () {
-    var val = this.anchor.pathname;
-
-    if (!/^\//.test(val)) {
-      val = "/" + val;
-    }
-
-    return val;
-  };
-
   var nativeMethods = (function () {
     var methods = {}, props, prop, i, l;
 
     props = ["href", "protocol", "host", "hostname", "port", "pathname", "search", "hash"];
     for (i = 0, l = props.length; i < l; i++) {
       prop = props[i];
-      methods[prop] = (prop === "pathname") ? pathnameGetter : nativeGetter(prop);
+      methods[prop] = nativeGetter(prop);
     }
 
     return methods;

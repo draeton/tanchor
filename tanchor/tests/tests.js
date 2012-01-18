@@ -81,10 +81,13 @@
 
         expect(props.length);
 
-        var t = new Tanchor(location);
+        var t = new Tanchor(DEFAULT_URL);
+
+        var a = document.createElement("a");
+        a.href = DEFAULT_URL;
 
         while (prop = props[i++]) {
-            equal(t[prop](), location[prop], "t." + prop + "()");
+            equal(t[prop](), a[prop], "t." + prop + "() equals a." + prop);
         }
     });
 
