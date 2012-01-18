@@ -176,6 +176,24 @@ var Tanchor = (function (window, document) {
       return this.getUrlVars_("hash");
     },
 
+    // ### getVars
+    //
+    // return combined url variables, hash first or last
+    getVars: function (hashFirst) {
+      var vars = this.getUrlVars_(),
+          search = vars.search,
+          hash = vars.hash,
+          combined;
+
+      if (hashFirst) {
+        combined = extend(hash, search);
+      } else {
+        combined = extend(search, hash);
+      }
+
+      return combined;
+    },
+
     // ### setSearchVars
     //
     // sets parameters using a key-value object in the URL search; returns this
@@ -290,26 +308,24 @@ var Tanchor = (function (window, document) {
   Anchor.factory.getQuery = function (key) {
     var href = window.location.href,
         t = new Anchor(href),
-        search = t.getSearchVars(),
-        hash = t.getHashVars(),
-        values = extend(search, hash),
+        vars = t.getVars(),
         result = {},
         l;
 
-    if (typeof key === "string" && values[key]) {
-      return values[key];
+    if (typeof key === "string" && vars[key]) {
+      return vars[key];
     }
     if (isArray(key)) {
       for (l = key.length; l--;) {
         result[key[l]] = false;
-        if (values[key[l]]) {
-          result[key[l]] = values[key[l]];
+        if (vars[key[l]]) {
+          result[key[l]] = vars[key[l]];
         }
       }
       return result;
     }
     if (typeof key === "undefined") {
-      return values;
+      return vars;
     }
     return false;
   };
