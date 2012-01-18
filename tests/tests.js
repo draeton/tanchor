@@ -75,19 +75,16 @@
 
 
     test("Functions like native anchor", function () {
-        var props = "href protocol host hostname port pathname search hash".split(" ");
+        var props = ["href", "protocol", "host", "hostname", "port", "pathname", "search", "hash"];
         var i = 0;
         var prop;
 
         expect(props.length);
 
-        var t = new Tanchor(DEFAULT_URL);
-
-        var a = document.createElement("a");
-        a.href = DEFAULT_URL;
+        var t = new Tanchor(location);
 
         while (prop = props[i++]) {
-            equal(t[prop](), a[prop], "t." + prop + "()");
+            equal(t[prop](), location[prop], "t." + prop + "()");
         }
     });
 
