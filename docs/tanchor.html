@@ -175,10 +175,10 @@ MIT licensed</p>             </td>             <td class="code">               <
       <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">getUrlVars_</span><span class="p">(</span><span class="s2">&quot;hash&quot;</span><span class="p">);</span>
     <span class="p">},</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <h3>getVars</h3>
+</pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <h3>getUrlVars</h3>
 
 <p>return combined url variables, hash first or last</p>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="nx">getVars</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">hashFirst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">getUrlVars</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">hashFirst</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">vars</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getUrlVars_</span><span class="p">(),</span>
           <span class="nx">search</span> <span class="o">=</span> <span class="nx">vars</span><span class="p">.</span><span class="nx">search</span><span class="p">,</span>
           <span class="nx">hash</span> <span class="o">=</span> <span class="nx">vars</span><span class="p">.</span><span class="nx">hash</span><span class="p">,</span>
@@ -307,7 +307,7 @@ MIT licensed</p>             </td>             <td class="code">               <
   <span class="nx">Anchor</span><span class="p">.</span><span class="nx">factory</span><span class="p">.</span><span class="nx">getQuery</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">href</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span>
         <span class="nx">t</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Anchor</span><span class="p">(</span><span class="nx">href</span><span class="p">),</span>
-        <span class="nx">vars</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getVars</span><span class="p">(),</span>
+        <span class="nx">vars</span> <span class="o">=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">getUrlVars</span><span class="p">(),</span>
         <span class="nx">result</span> <span class="o">=</span> <span class="p">{},</span>
         <span class="nx">l</span><span class="p">;</span>
 
