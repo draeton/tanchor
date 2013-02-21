@@ -2,7 +2,7 @@
 //
 // [http://draeton.github.com/tanchor](http://draeton.github.com/tanchor)
 //
-// Copyright 2012, Matthew Cobbs
+// Copyright 2013, Matthew Cobbs
 // MIT licensed
 /*global */
 var Tanchor = (function (window, document, location) {
