@@ -46,7 +46,7 @@ Tanchor is a single-script utility.
 
 (The MIT License)
 
-Copyright (c) 2012, <[Matthew Cobbs](mailto:draeton@gmail.com)>
+Copyright (c) 2013, <[Matthew Cobbs](mailto:draeton@gmail.com)>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
