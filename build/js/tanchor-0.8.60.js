@@ -9,8 +9,6 @@ var Tanchor = (function (window, document, location) {
 
   "use strict";
 
-  a = 3;
-
   // **type check**
   var isObject = function (o) {
     return typeof o === "object" && o !== null;
