@@ -27,10 +27,12 @@
     <target name="prod"
         description="Builds project files for production use"
         depends="
-            increment,
-            -load.properties,
-            -clean,
             -init,
+            -load.properties,
+            jshint,
+            -commit.message,
+            -clean,
+            -increment,
             -readme,
             -docco,
             -concat,
