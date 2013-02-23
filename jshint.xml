@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jshint>
+    <file name="c:\home\github\tanchor\src\tanchor.js">
+        <issue line="12" char="3" reason="&apos;a&apos; is not defined." evidence="  a = 3;"/>
+    </file>
+</jshint>
