@@ -30,6 +30,7 @@
             -init,
             -load.properties,
             jshint,
+            jstest,
             -commit.message,
             -clean,
             -increment,
