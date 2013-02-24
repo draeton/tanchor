@@ -266,8 +266,16 @@ var Tanchor = (function (window, document, location) {
 
   var regexPD = /^(http|https|ftp):\/\/([\w\-\d]+\.)+[\w\-\d]+/;
 
+  // **options default values**
+  var defaults = {
+    searchEq: "=",
+    searchSep: "&",
+    hashEq: "=",
+    hashSep: "&"
+  };
+
   // ### constructor and prototype
-  var Anchor = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
+  var Anchor = function (href, options) {
     if (typeof href === "undefined" || href === "") {
       throw new Error("The href argument must be defined and non-empty.");
     }
@@ -283,23 +291,22 @@ var Tanchor = (function (window, document, location) {
       this.anchor.hostname = location.hostname;
     }
 
-    this.seq = searchEq  || "=";
-    this.ssp = searchSep || "&";
-    this.heq = hashEq    || "=";
-    this.hsp = hashSep   || "&";
+    // extend options
+    this.settings = extend({}, defaults, options);
+
+    // set equality and separator values
+    this.seq = this.settings.searchEq;
+    this.ssp = this.settings.searchSep;
+    this.heq = this.settings.hashEq;
+    this.hsp = this.settings.hashSep;
   };
 
   Anchor.prototype = extend({}, nativeMethods, privateMethods, publicMethods);
 
-  // ### factory
-  Anchor.factory = function (href, /* optional */ searchEq, searchSep, hashEq, hashSep) {
-    return new Anchor(href, searchEq, searchSep, hashEq, hashSep);
-  };
-
   // ### getQuery
   //
   // Legacy method implemented for backwards compatibility
-  Anchor.factory.getQuery = function (key) {
+  Anchor.getQuery = function (key) {
     var href = location.href,
         t = new Anchor(href),
         vars = t.getUrlVars(),
@@ -324,7 +331,7 @@ var Tanchor = (function (window, document, location) {
     return false;
   };
 
-  // ### return factory
-  return Anchor.factory;
+  // ### return constructor
+  return Anchor;
 
 }(window, document, location));

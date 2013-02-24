@@ -36,6 +36,7 @@
         equal(t.hostname(), "google.com", "Absolute URL produces absolute link.");
     });
 
+
     test("Partial URLs", 5, function () {
         var t;
 
@@ -53,7 +54,7 @@
 
         t = new Tanchor("//google.com");
         equal(t.protocol(), location.protocol, "Protocol-relative");
-    })
+    });
 
 
     test("t.anchor OR t.a", 2, function () {
@@ -71,7 +72,12 @@
         t = new Tanchor(DEFAULT_URL);
         equal(t.seq+t.ssp+t.heq+t.hsp, "=&=&", "Default equality and separator values are =, &, =, &");
 
-        t = new Tanchor(DEFAULT_URL, ":", "/", "-", "|");
+        t = new Tanchor(DEFAULT_URL, {
+            searchEq: ":",
+            searchSep: "/",
+            hashEq: "-",
+            hashSep: "|"
+        });
         equal(t.seq+t.ssp+t.heq+t.hsp, ":/-|", "Equality and separator values are :, /, -, |");
     });
 
@@ -117,7 +123,10 @@
         ok(v.hasOwnProperty("fruit"), "Undefined value in object for key-only parameter");
         equal(v.fruit, undefined, "Undefined value in object for key-only parameter");
 
-        t = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple", ":", "/");
+        t = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple", {
+            searchEq: ":",
+            searchSep: "/"
+        });
         v = t.getSearchVars();
         expected = {"fruit": "banana", "pie": "apple"};
         equal(JSON.stringify(v), JSON.stringify(expected), "Custom operators: Simple map of keys and values");
@@ -147,7 +156,10 @@
         ok(v.hasOwnProperty("fruit"), "Undefined value in object for key-only parameter");
         equal(v.fruit, undefined, "Undefined value in object for key-only parameter");
 
-        t = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple", null, null, ":", "/");
+        t = new Tanchor("http://www.example.com/?fruit:banana/pie:apple#fruit:banana/pie:apple",{
+            hashEq: ":",
+            hashSep: "/"
+        });
         v = t.getHashVars();
         expected = {"fruit": "banana", "pie": "apple"};
         equal(JSON.stringify(v), JSON.stringify(expected), "Custom operators: Simple map of keys and values");
