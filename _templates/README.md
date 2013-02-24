@@ -1,4 +1,4 @@
-[![build status](https://raw.github.com/draeton/tanchor/master/status.png)](http://draeton.github.com/tanchor/)
+[![build status](https://raw.github.com/draeton/tanchor/master/out/status.png)](http://draeton.github.com/tanchor/)
 
 [Tanchor](http://draeton.github.com/tanchor/)
 ==========
