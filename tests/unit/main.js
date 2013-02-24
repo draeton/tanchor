@@ -8,7 +8,9 @@
     var DEFAULT_URL = "http://www.example.com/?fruit=banana&pie=apple#fruit=banana&pie=apple";
 
 
-    module("Tanchor");
+    module("Tanchor", {
+        teardown: window.moduleTeardown
+    });
 
 
     test("Dependencies", 1, function () {
