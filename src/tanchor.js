@@ -9,6 +9,8 @@ var Tanchor = (function (window, document, location) {
 
   "use strict";
 
+  a = 3;
+
   // **type check**
   var isObject = function (o) {
     return typeof o === "object" && o !== null;
@@ -173,7 +175,7 @@ var Tanchor = (function (window, document, location) {
     //
     // returns a key-value object with the parameters in the URL hash
     getHashVars: function () {
-      return this.getUrlVars_("hash");
+      return a; //this.getUrlVars_("hash");
     },
 
     // ### getUrlVars
