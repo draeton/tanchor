@@ -29,10 +29,9 @@
         depends="
             -init,
             -load.properties,
-            jshint,
-            jstest,
-            -commit.message,
             -clean,
+            -check-status,
+            -commit.message,
             -increment,
             -readme,
             -docco,
