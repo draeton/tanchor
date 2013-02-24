@@ -2,31 +2,31 @@ JS Test Results
 ===============================================================================
 
 Running file:///c:/home/github/tanchor/tests/index.html...
-1. Tanchor: Dependencies (1, 0, 1)
+1. main: Dependencies (1, 0, 1)
     1. Pass: Tanchor exists.
 Test passed.
-2. Tanchor: Initialization (4, 0, 4)
+2. main: Initialization (4, 0, 4)
     1. Pass: No arguments raises exception.
     2. Pass: Empty string href raises exception because behavior is unpredictable.
     3. Pass: Full path is returned when used as first argument.
     4. Pass: Absolute URL produces absolute link.
 Test passed.
-3. Tanchor: Partial URLs (5, 0, 5)
+3. main: Partial URLs (5, 0, 5)
     1. Pass: Relative path with root
     2. Pass: Relative path without root
     3. Pass: Search only
     4. Pass: Hash only
     5. Pass: Protocol-relative
 Test passed.
-4. Tanchor: t.anchor OR t.a (2, 0, 2)
+4. main: t.anchor OR t.a (2, 0, 2)
     1. Pass: t.anchor references an Anchor Element.
     2. Pass: t.a is a shortcut for t.anchor.
 Test passed.
-5. Tanchor: Custom operators (2, 0, 2)
+5. main: Custom operators (2, 0, 2)
     1. Pass: Default equality and separator values are =, &, =, &
     2. Pass: Equality and separator values are :, /, -, |
 Test passed.
-6. Tanchor: Functions like native anchor (8, 0, 8)
+6. main: Functions like native anchor (8, 0, 8)
     1. Pass: t.href() equals a.href
     2. Pass: t.protocol() equals a.protocol
     3. Pass: t.host() equals a.host
@@ -36,7 +36,7 @@ Test passed.
     7. Pass: t.search() equals a.search
     8. Pass: t.hash() equals a.hash
 Test passed.
-7. Tanchor: getSearchVars() (6, 0, 6)
+7. main: getSearchVars() (6, 0, 6)
     1. Pass: Empty object
     2. Pass: Simple map of keys and values
     3. Pass: Array for duplicate parameters
@@ -44,7 +44,7 @@ Test passed.
     5. Pass: Undefined value in object for key-only parameter
     6. Pass: Custom operators: Simple map of keys and values
 Test passed.
-8. Tanchor: getHashVars() (6, 0, 6)
+8. main: getHashVars() (6, 0, 6)
     1. Pass: Empty object
     2. Pass: Simple map of keys and values
     3. Pass: Array for duplicate parameters
@@ -52,30 +52,30 @@ Test passed.
     5. Pass: Undefined value in object for key-only parameter
     6. Pass: Custom operators: Simple map of keys and values
 Test passed.
-9. Tanchor: setSearchVars() (3, 0, 3)
+9. main: setSearchVars() (3, 0, 3)
     1. Pass: Object with existing property updates parameter
     2. Pass: Object with new property adds parameter
     3. Pass: Object with undefined property deletes parameter
 Test passed.
-10. Tanchor: setHashVars() (3, 0, 3)
+10. main: setHashVars() (3, 0, 3)
     1. Pass: Object with existing property updates parameter
     2. Pass: Object with new property adds parameter
     3. Pass: Object with undefined property deletes parameter
 Test passed.
-11. Tanchor: setSearchVar() (3, 0, 3)
+11. main: setSearchVar() (3, 0, 3)
     1. Pass: Existing key updates parameter
     2. Pass: New key adds parameter
     3. Pass: Key undefined value deletes parameter
 Test passed.
-12. Tanchor: setHashVar() (3, 0, 3)
+12. main: setHashVar() (3, 0, 3)
     1. Pass: Existing key updates parameter
     2. Pass: New key adds parameter
     3. Pass: Key undefined value deletes parameter
 Test passed.
-13. Tanchor: delSearchVar() (1, 0, 1)
+13. main: delSearchVar() (1, 0, 1)
     1. Pass: Deletes parameter
 Test passed.
-14. Tanchor: delHashVar() (1, 0, 1)
+14. main: delHashVar() (1, 0, 1)
     1. Pass: Key undefined value deletes parameter
 Test passed.
 ===============================================================================
