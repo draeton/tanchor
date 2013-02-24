@@ -173,7 +173,7 @@ var Tanchor = (function (window, document, location) {
     //
     // returns a key-value object with the parameters in the URL hash
     getHashVars: function () {
-      return a; //this.getUrlVars_("hash");
+      return this.getUrlVars_("hash");
     },
 
     // ### getUrlVars

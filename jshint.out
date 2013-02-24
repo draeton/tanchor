@@ -1,9 +1,3 @@
 JSHint validation summary:
-----------------------------------------------------------------------
-
-JSHint validation failed for c:\home\github\tanchor\src\tanchor.js
-'a' is not defined. (line: 176, character: 14)
- >       return a; //this.getUrlVars_("hash");
-----------------------------------------------------------------------
-JSHint found 1 error.
-February 23, 2013 10:35:55 PM EST
+1  JS files passed JSHint code checks
+February 23, 2013 10:36:48 PM EST

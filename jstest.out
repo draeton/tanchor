@@ -44,14 +44,14 @@ Test passed.
     5. Pass: Undefined value in object for key-only parameter
     6. Pass: Custom operators: Simple map of keys and values
 Test passed.
-8. Tanchor: getHashVars() (0, 2, 2)
-    1. Fail: Died on test #1     at file:///c:/home/github/tanchor/tests/qunit/qunit.js:412
-    at file:///c:/home/github/tanchor/tests/tests.js:152
-    at file:///c:/home/github/tanchor/tests/tests.js:257: Can't find variable: a
-    Expected [undefined] but was [undefined].
-    2. Fail: Expected 6 assertions, but 1 were run
-    Expected [undefined] but was [undefined].
-Test failed.
+8. Tanchor: getHashVars() (6, 0, 6)
+    1. Pass: Empty object
+    2. Pass: Simple map of keys and values
+    3. Pass: Array for duplicate parameters
+    4. Pass: Undefined value in object for key-only parameter
+    5. Pass: Undefined value in object for key-only parameter
+    6. Pass: Custom operators: Simple map of keys and values
+Test passed.
 9. Tanchor: setSearchVars() (3, 0, 3)
     1. Pass: Object with existing property updates parameter
     2. Pass: Object with new property adds parameter
@@ -79,4 +79,4 @@ Test passed.
     1. Pass: Key undefined value deletes parameter
 Test passed.
 ===============================================================================
-JS tests failed. 1 test failed. 0 error.
+JS tests passed. 14 tests passed.
